@@ -1,5 +1,4 @@
-import 백준.DivideSum
-import 프로그래머스.MakeAllZero
+import 백준.Eureka
 
 fun main() {
 //    //프로그래머스
@@ -14,6 +13,6 @@ fun main() {
 //    println(solution.solution(a, edges))
 
     // 백준
-    val test = DivideSum()
+    val test = Eureka()
     test.run()
 }
