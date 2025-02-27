@@ -1,5 +1,6 @@
 import 백준.Eureka
 import 백준.OneTwoThreeSum
+import 백준.SevenDwarfs
 import 프로그래머스.CoinFlip
 
 fun main() {
@@ -22,6 +23,6 @@ fun main() {
 //    println(solution.solution(beginning, target))
 
     // 백준
-    val test = OneTwoThreeSum()
+    val test = SevenDwarfs()
     test.run()
 }
