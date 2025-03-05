@@ -10,6 +10,6 @@ fun main() {
 //    println(solution.solution(players, m, k))
 
     // 백준
-    val test = NumberSquare()
+    val test = Tournament()
     test.run()
 }
