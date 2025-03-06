@@ -13,6 +13,6 @@ fun main() {
 //    println(solution.solution(info, n, m))
 
     // 백준
-    val test = CuttingTriangle()
+    val test = SellItem()
     test.run()
 }
