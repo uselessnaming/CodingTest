@@ -14,6 +14,6 @@ fun main() {
 //    println(solution.solution(schedules, timelogs, startday))
 
     // 백준
-    val test = LuckyTicket()
+    val test = Filter()
     test.run()
 }
