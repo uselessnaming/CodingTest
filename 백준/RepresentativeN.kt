@@ -2,6 +2,8 @@ package 백준
 
 import kotlin.math.abs
 
+// 백준 2548번 대표 자연수
+
 class RepresentativeN {
     lateinit var numbers : List<Int>
 
@@ -21,7 +23,7 @@ class RepresentativeN {
             if (cur < result) {
                 result = cur
                 answer = target
-            } 
+            }
         }
 
         println(answer)
