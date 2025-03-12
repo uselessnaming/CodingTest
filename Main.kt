@@ -16,6 +16,6 @@ fun main() {
 //    println(solution.solution(n, q, ans))
 
     // 백준
-    val test = Concave()
+    val test = BigOrSmallN()
     test.run()
 }
