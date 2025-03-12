@@ -10,12 +10,12 @@ fun main() {
 //        intArrayOf(1, 4, 6, 7, 9),
 //        intArrayOf(1, 2, 8, 10, 12),
 //        intArrayOf(6, 7, 11, 13, 15),
-//        intArrayOf(1, 4, 10, 11, 14)
+//        intArrayOf(1, 4, 10, 1[1, 14)
 //    )
 //    val ans = intArrayOf(2,1,3,0,1)
 //    println(solution.solution(n, q, ans))
 
     // 백준
-    val test = RepresentativeN()
+    val test = Concave()
     test.run()
 }
