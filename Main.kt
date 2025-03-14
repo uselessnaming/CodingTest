@@ -18,6 +18,6 @@ fun main() {
 //    println(solution.solution(nodes, edges).toList())
 
     // 백준
-    val test = MarathonTicTacTo()
+    val test = HanHateStudy()
     test.run()
 }
