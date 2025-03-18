@@ -3,9 +3,12 @@ import 프로그래머스.*
 
 fun main() {
     //프로그래머스
-    val solution = RestoreExpression()
-    val expressions = arrayOf("2 - 1 = 1", "2 + 2 = X", "7 + 4 = X", "5 - 5 = X")
-    println(solution.solution(expressions).toList())
+    val solution = SkillTest4()
+    val want = arrayOf("banana", "apple", "rice", "pork", "pot")
+    val number = intArrayOf(3, 2, 2, 2, 1)
+    val discount = arrayOf("chicken", "apple", "apple", "banana", "rice", "apple", "pork", "banana", "pork", "rice", "pot", "banana", "apple", "banana")
+
+    println(solution.solution(want, number, discount))
 
 //    // 백준
 //    val test = EggHit()
