@@ -10,5 +10,5 @@ fun main() {
 //    println(solution.solution(sequence, k).toList())
 
     // 백준
-    val test = Change().apply{run()}
+    Walking().apply{run()}
 }
