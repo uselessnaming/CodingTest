@@ -1,14 +1,13 @@
 import 백준.*
 import 프로그래머스.*
+import java.util.*
 
 fun main() {
-//    //프로그래머스
-//    val solution = DiscountEvent()
-//    val want = arrayOf("banana", "apple", "rice", "pork", "pot")
-//    val number = intArrayOf(3,2,2,2,1)
-//    val discount = arrayOf("chicken", "apple", "apple", "banana", "rice", "apple", "pork", "banana", "pork", "rice", "pot", "banana", "apple", "banana")
-//    println(solution.solution(want, number, discount))
+    //프로그래머스
+//    val solution = Solution()
+//    val maps = arrayOf("X591X","11X5X","X231X", "1XXX1")
+//    println(solution.solution(maps).toList())
 
     // 백준
-    Origami().apply{run()}
+    Ramen().apply{run()}
 }
