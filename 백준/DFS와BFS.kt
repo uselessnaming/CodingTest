@@ -1,5 +1,7 @@
 package 백준
 
+// 1260번 백준 DFS와 BFS
+
 class DAndB {
 
     lateinit var visited: BooleanArray
