@@ -3,6 +3,12 @@ package 백준
 import java.util.LinkedList
 import java.util.Queue
 
+// 알고리즘 자체는 맞았음
+// 단지 String에서 Int형으로 변환할 때 toInt(), toString()의 경우
+// 연산과 함께 쓰기에는 다소 무리가 있으며 조심해야 함
+// 알 수 없는 오류들이 꽤나 빈번하게 발생
+// 따라서 자리수 변환 같은 경우 /와 %를 적절하게 이용하는 방벙이 더 나음
+
 class DSLR{
     fun run(){
         val n = readln().toInt()
