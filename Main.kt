@@ -8,5 +8,5 @@ fun main() {
 //    solution.run()
 
     // 백준
-    MaxValue().apply{run()}
+    Scale().apply{run()}
 }
