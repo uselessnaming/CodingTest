@@ -8,5 +8,5 @@ fun main() {
 //    solution.run()
 
     // 백준
-    Scale().apply{run()}
+    Receipt().apply{run()}
 }
