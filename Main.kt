@@ -8,5 +8,5 @@ fun main() {
 //    solution.run()
 
     // 백준
-    PrintStar().apply{run()}
+    MaxValue().apply{run()}
 }
