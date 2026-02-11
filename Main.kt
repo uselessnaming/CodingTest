@@ -8,5 +8,5 @@ fun main() {
 //    solution.run()
 
     // 백준
-    Receipt().apply{run()}
+    Switch().apply{run()}
 }
