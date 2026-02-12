@@ -8,5 +8,5 @@ fun main() {
 //    solution.run()
 
     // 백준
-    Bracket().apply{run()}
+    TruckPark().apply{run()}
 }
