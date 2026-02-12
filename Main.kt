@@ -8,5 +8,5 @@ fun main() {
 //    solution.run()
 
     // 백준
-    Switch().apply{run()}
+    Bracket().apply{run()}
 }
