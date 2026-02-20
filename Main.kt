@@ -8,5 +8,5 @@ fun main() {
 //    solution.run()
 
     // 백준
-    TruckPark().apply{run()}
+    Slope().apply{run()}
 }
