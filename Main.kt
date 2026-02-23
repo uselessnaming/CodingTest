@@ -8,5 +8,5 @@ fun main() {
 //    solution.run()
 
     // 백준
-    PaintChecker().apply{run()}
+    MovieDirector().apply{run()}
 }
