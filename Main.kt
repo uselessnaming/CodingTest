@@ -8,5 +8,5 @@ fun main() {
 //    solution.run()
 
     // 백준
-    Slope().apply{run()}
+    BlackJack().apply{run()}
 }
