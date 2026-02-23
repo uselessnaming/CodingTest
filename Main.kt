@@ -8,5 +8,5 @@ fun main() {
 //    solution.run()
 
     // 백준
-    BlackJack().apply{run()}
+    PaintChecker().apply{run()}
 }
