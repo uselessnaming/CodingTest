@@ -8,5 +8,5 @@ fun main() {
 //    solution.run()
 
     // 백준
-    EveryPermutation().apply{run()}
+    NAndMSeries().apply{secondRun()}
 }
