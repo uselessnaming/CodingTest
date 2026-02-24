@@ -8,5 +8,5 @@ fun main() {
 //    solution.run()
 
     // 백준
-    MovieDirector().apply{run()}
+    EveryPermutation().apply{run()}
 }
