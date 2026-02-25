@@ -1,10 +1,9 @@
 package 백준
 
-import java.time.LocalDateTime
-
 class NAndMSeries {
     private var secondAnswers = mutableSetOf<List<Int>>()
     private var thirdAnswers = mutableSetOf<List<Int>>()
+    private var fourthAnswers = mutableSetOf<List<Int>>()
 
     /** 15649 n과 m (1) */
     fun firstRun() {
@@ -55,7 +54,6 @@ class NAndMSeries {
 
     /** 15651 n과 m (3) */
     fun thirdRun() {
-        val now = System.currentTimeMillis()
         val (n, m) = readln().split(" ").map { it.toInt() }
         thirdDfs(0, n, m, emptyList())
         println(thirdAnswers.joinToString("\n") { it.joinToString(" ") })
@@ -69,6 +67,26 @@ class NAndMSeries {
 
         for (i in 1..end) {
             thirdDfs(depth + 1, end, limit, answer + i)
+        }
+    }
+
+    /** 15652 n과 m (4) **/
+    fun fourthRun() {
+        val (n, m) = readln().split(" ").map { it.toInt() }
+        fourthDfs(0, n, m, emptyList())
+        println(fourthAnswers.joinToString("\n") { it.joinToString(" ") })
+    }
+
+    private fun fourthDfs(depth: Int, end: Int, limit: Int, answer: List<Int>) {
+        if (depth == limit) {
+            fourthAnswers.add(answer.sorted())
+            return
+        }
+
+        for (i in 1..end) {
+            if (answer.isEmpty() || i >= answer.last()) {
+                fourthDfs(depth + 1, end, limit, answer + i)
+            }
         }
     }
 }
