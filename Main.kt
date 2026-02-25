@@ -8,5 +8,5 @@ fun main() {
 //    solution.run()
 
     // 백준
-    NAndMSeries().apply{secondRun()}
+    NAndMSeries().apply{thirdRun()}
 }
