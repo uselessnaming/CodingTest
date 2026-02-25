@@ -4,6 +4,7 @@ class NAndMSeries {
     private var secondAnswers = mutableSetOf<List<Int>>()
     private var thirdAnswers = mutableSetOf<List<Int>>()
     private var fourthAnswers = mutableSetOf<List<Int>>()
+    private var fifthAnswers = mutableSetOf<List<Int>>()
 
     /** 15649 n과 m (1) */
     fun firstRun() {
@@ -86,6 +87,32 @@ class NAndMSeries {
         for (i in 1..end) {
             if (answer.isEmpty() || i >= answer.last()) {
                 fourthDfs(depth + 1, end, limit, answer + i)
+            }
+        }
+    }
+
+    /** 15654 n과 m (5) */
+    fun fifthRun() {
+        val (n, m) = readln().split(" ").map { it.toInt() }
+        val numbers = readln().split(" ").map { it.toInt() }
+        val visited = BooleanArray(n) { false }
+
+        fifthDfs(0, m, numbers.sorted(), emptyList(), visited)
+
+        println(fifthAnswers.joinToString("\n") { it.joinToString(" ") })
+    }
+
+    private fun fifthDfs(depth: Int, limit: Int, numbers: List<Int>, answer: List<Int>, visited: BooleanArray) {
+        if (depth == limit) {
+            fifthAnswers.add(answer)
+            return
+        }
+
+        for (i in numbers.indices) {
+            if (!visited[i]) {
+                visited[i] = true
+                fifthDfs(depth + 1, limit, numbers, answer + numbers[i], visited)
+                visited[i] = false
             }
         }
     }
