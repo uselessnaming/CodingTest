@@ -4,9 +4,11 @@ import java.util.*
 
 fun main() {
 //    //프로그래머스
-//    val solution = PrintStar()
-//    solution.run()
+    val k = 10L
+    val roomNumber = longArrayOf(1,3,4,1,3,1)
+    val answer = HotelScheduling().solution(k, roomNumber)
+    print(answer.toList())
 
     // 백준
-    NAndMSeries().apply { fifthRun() }
+//    SumOfPermutation().apply { run() }
 }
