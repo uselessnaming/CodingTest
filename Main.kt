@@ -4,11 +4,11 @@ import java.util.*
 
 fun main() {
 //    //프로그래머스
-//    val k = 10L
-//    val roomNumber = longArrayOf(1,3,4,1,3,1)
-//    val answer = HotelScheduling().solution(k, roomNumber)
-//    print(answer.toList())
+    val k = 5L
+    val food_times = intArrayOf(3,1,2)
+    val answer = StreamingToEat().solution(food_times, k)
+    print(answer)
 
     // 백준
-    RepresentationOfSet().apply { run() }
+//    RepresentationOfSet().apply { run() }
 }
