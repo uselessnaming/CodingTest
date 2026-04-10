@@ -4,9 +4,8 @@ import java.util.*
 
 fun main() {
 //    //프로그래머스
-    val k = 5L
-    val food_times = intArrayOf(3,1,2)
-    val answer = StreamingToEat().solution(food_times, k)
+    val n = 5
+    val answer = NumberOfBrackets().solution(n)
     print(answer)
 
     // 백준
