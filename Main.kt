@@ -4,10 +4,10 @@ import java.util.*
 
 fun main() {
 //    //프로그래머스
-    val n = 5
-    val answer = NumberOfBrackets().solution(n)
-    print(answer)
+//    val n = 5
+//    val answer = NumberOfBrackets().solution(n)
+//    print(answer)
 
     // 백준
-//    RepresentationOfSet().apply { run() }
+    SetBj().apply { run() }
 }
