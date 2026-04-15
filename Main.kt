@@ -9,5 +9,5 @@ fun main() {
 //    print(answer)
 
     // 백준
-    SetBj().apply { run() }
+    StartAndLink().apply { run() }
 }
