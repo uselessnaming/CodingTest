@@ -4,10 +4,9 @@ import java.util.*
 
 fun main() {
     //프로그래머스
-    val rocks = intArrayOf(2, 14, 11, 21, 17)
-    val n = 2
-    val distance = 25
-    val answer = SteppingStone().solution(distance, rocks, n)
+    val n = 4
+    val tops = intArrayOf(1, 1, 0, 1)
+    val answer = Tiling().solution(n, tops)
     print(answer)
 
 //    // 백준
