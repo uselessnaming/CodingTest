@@ -4,9 +4,14 @@ import java.util.*
 
 fun main() {
     //프로그래머스
-    val n = 4
-    val tops = intArrayOf(1, 1, 0, 1)
-    val answer = Tiling().solution(n, tops)
+    val board = arrayOf(
+        intArrayOf(0, 0, 0, 1, 1),
+        intArrayOf(0, 0, 0, 1, 0),
+        intArrayOf(0, 1, 0, 1, 1),
+        intArrayOf(1, 1, 0, 0, 1),
+        intArrayOf(0, 0, 0, 0, 0)
+    )
+    val answer = MoveBlock().solution(board)
     print(answer)
 
 //    // 백준
