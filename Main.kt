@@ -4,14 +4,10 @@ import java.util.*
 
 fun main() {
     //프로그래머스
-    val alp = 10
-    val cop = 10
-    val problems = arrayOf(
-        intArrayOf(10,15,2,1,2),
-        intArrayOf(20,20,3,3,4)
-    )
-    val answer = CodingTestStudy().solution(alp, cop, problems)
-    print(answer)
+    val words = arrayOf("frodo", "front", "frost", "frozen", "frame", "kakao")
+    val queries = arrayOf("fro??", "????o", "fr???", "fro???", "pro?")
+    val answer = SearchText().solution(words, queries)
+    print(answer.toList())
 
 //    // 백준
 //    StartAndLink().apply { run() }
