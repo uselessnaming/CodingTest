@@ -4,18 +4,30 @@ import java.util.*
 
 fun main() {
     //프로그래머스
-    val n = 2
-    val m = 2
-    val x = 0
-    val y = 0
-    val queries = arrayOf(
-        intArrayOf(2,1),
-        intArrayOf(0,1),
-        intArrayOf(1,1),
-        intArrayOf(0,1),
-        intArrayOf(2,1)
+    val word = "Muzi"
+    val pages = arrayOf(
+        """<html lang="ko" xml:lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+              <meta charset="utf-8">
+              <meta property="og:url" content="https://careers.kakao.com/interview/list"/>
+            </head>
+            <body>
+                <a href="https://programmers.co.kr/learn/courses/4673"></a>#!MuziMuzi!)jayg07con&&
+            </body>
+            </html>""".trimIndent(),
+        """<html lang="ko" xml:lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+              <meta charset="utf-8">
+              <meta property="og:url" content="https://www.kakaocorp.com"/>
+            </head>
+            <body>
+            con%    muzI92apeach&2<a href="https://hashcode.co.kr/tos"></a>
+            
+                ^
+            </body>
+            </html>""".trimIndent(),
     )
-    val answer = MoveBallSimulation().solution(n, m, x, y, queries)
+    val answer = MatchingScore().solution(word, pages)
     print(answer)
 
 //    // 백준
