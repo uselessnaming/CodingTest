@@ -5,18 +5,15 @@ import java.util.*
 fun main() {
     //프로그래머스
     val board = arrayOf(
-        intArrayOf(0,0,0,0,0,0,0,0,0,0),
-        intArrayOf(0,0,0,0,0,0,0,0,0,0),
-        intArrayOf(0,0,0,0,0,0,0,0,0,0),
-        intArrayOf(0,0,0,0,0,0,0,0,0,0),
-        intArrayOf(0,0,0,0,0,0,4,0,0,0),
-        intArrayOf(0,0,0,0,0,4,4,0,0,0),
-        intArrayOf(0,0,0,0,3,0,4,0,0,0),
-        intArrayOf(0,0,0,2,3,0,0,0,5,5),
-        intArrayOf(1,2,2,2,3,3,0,0,0,5),
-        intArrayOf(1,1,1,0,0,0,0,0,0,5)
+        intArrayOf(1,0,0,3),
+        intArrayOf(2,0,0,0),
+        intArrayOf(0,0,0,2),
+        intArrayOf(3,0,1,0)
     )
-    val answer = BlockGame().solution(board)
+    val r = 1
+    val c = 0
+
+    val answer = MatchingCard().solution(board, r, c)
     print(answer)
 
 //    // 백준
