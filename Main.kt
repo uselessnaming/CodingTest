@@ -4,16 +4,26 @@ import java.util.*
 
 fun main() {
     //프로그래머스
-    val board = arrayOf(
-        intArrayOf(1,0,0,3),
-        intArrayOf(2,0,0,0),
-        intArrayOf(0,0,0,2),
-        intArrayOf(3,0,1,0)
-    )
-    val r = 1
-    val c = 0
+    val n = 9
 
-    val answer = MatchingCard().solution(board, r, c)
+    val path = arrayOf(
+        intArrayOf(0, 1),
+        intArrayOf(0, 3),
+        intArrayOf(0, 7),
+        intArrayOf(8, 1),
+        intArrayOf(3, 6),
+        intArrayOf(1, 2),
+        intArrayOf(4, 7),
+        intArrayOf(7, 5),
+    )
+
+    val order = arrayOf(
+        intArrayOf(4, 1),
+        intArrayOf(8, 7),
+        intArrayOf(6, 5),
+    )
+
+    val answer = CaveExploration().solution(n, path, order)
     print(answer)
 
 //    // 백준
