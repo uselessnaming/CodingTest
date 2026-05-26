@@ -4,15 +4,20 @@ import java.util.*
 
 fun main() {
     //프로그래머스
-    val land = arrayOf(
-        intArrayOf(1,4,8,10),
-        intArrayOf(5,5,5,5),
-        intArrayOf(10,10,10,10),
-        intArrayOf(10,10,10,20),
+    val n = 4
+    val edges = arrayOf(
+        intArrayOf(1,2),
+        intArrayOf(2,3),
+        intArrayOf(3,4)
     )
-    val height = 3
+//    val edges = arrayOf(
+//        intArrayOf(1,5),
+//        intArrayOf(2,5),
+//        intArrayOf(3,5),
+//        intArrayOf(4,5)
+//    )
 
-    val answer = MoveArea().solution(land, height)
+    val answer = TreeTrio().solution(n, edges)
     print(answer)
 
 //    // 백준
