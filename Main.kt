@@ -4,20 +4,14 @@ import java.util.*
 
 fun main() {
     //프로그래머스
-    val n = 4
-    val edges = arrayOf(
-        intArrayOf(1,2),
-        intArrayOf(2,3),
-        intArrayOf(3,4)
-    )
-//    val edges = arrayOf(
-//        intArrayOf(1,5),
-//        intArrayOf(2,5),
-//        intArrayOf(3,5),
-//        intArrayOf(4,5)
-//    )
+    val a = 10
+    val b = 10
+    val g = intArrayOf(70, 70, 0)
+    val s = intArrayOf(0, 0, 500)
+    val w = intArrayOf(100, 100, 2)
+    val t = intArrayOf(4, 8, 1)
 
-    val answer = TreeTrio().solution(n, edges)
+    val answer = CarryGoldAndSilver().solution(a, b, g, s, w, t)
     print(answer)
 
 //    // 백준
