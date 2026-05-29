@@ -4,24 +4,15 @@ import java.util.*
 
 fun main() {
     //프로그래머스
-    val gameBoard = arrayOf(
-        intArrayOf(1,1,0,0,1,0),
-        intArrayOf(0,0,1,0,1,0),
-        intArrayOf(0,1,1,0,0,1),
-        intArrayOf(1,1,0,1,1,1),
-        intArrayOf(1,0,0,0,1,0),
-        intArrayOf(0,1,1,1,0,0),
+    val board = arrayOf(
+        intArrayOf(1,1,1),
+        intArrayOf(1,0,1),
+        intArrayOf(1,1,1),
     )
-    val table = arrayOf(
-        intArrayOf(1,0,0,1,1,0),
-        intArrayOf(1,0,1,0,1,0),
-        intArrayOf(0,1,1,0,1,1),
-        intArrayOf(0,0,1,0,0,0),
-        intArrayOf(1,1,0,1,1,0),
-        intArrayOf(0,1,0,0,0,0),
-    )
+    val aloc = intArrayOf(1,0)
+    val bloc = intArrayOf(1,2)
 
-    val answer = FillPuzzle().solution(gameBoard, table)
+    val answer = DisappearingScaffold().solution(board, aloc, bloc)
     print(answer)
 
 //    // 백준
