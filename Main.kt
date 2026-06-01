@@ -4,15 +4,13 @@ import java.util.*
 
 fun main() {
     //프로그래머스
-    val board = arrayOf(
-        intArrayOf(1,1,1),
-        intArrayOf(1,0,1),
-        intArrayOf(1,1,1),
+    val clockHands = arrayOf(
+        intArrayOf(0,3,3,0),
+        intArrayOf(3,2,2,3),
+        intArrayOf(0,3,2,0),
+        intArrayOf(0,3,3,3)
     )
-    val aloc = intArrayOf(1,0)
-    val bloc = intArrayOf(1,2)
-
-    val answer = DisappearingScaffold().solution(board, aloc, bloc)
+    val answer = ArchaeologicalDiscovery().solution(clockHands)
     print(answer)
 
 //    // 백준
