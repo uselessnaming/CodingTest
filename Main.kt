@@ -4,14 +4,14 @@ import java.util.*
 
 fun main() {
     //프로그래머스
-    val clockHands = arrayOf(
-        intArrayOf(0,3,3,0),
-        intArrayOf(3,2,2,3),
-        intArrayOf(0,3,2,0),
-        intArrayOf(0,3,3,3)
+    val rc = arrayOf(
+        intArrayOf(1, 2, 3, 4),
+        intArrayOf(5, 6, 7, 8),
+        intArrayOf(9, 10, 11, 12)
     )
-    val answer = ArchaeologicalDiscovery().solution(clockHands)
-    print(answer)
+    val operations = arrayOf("ShiftRow", "Rotate", "ShiftRow", "Rotate")
+    val answer = MatrixAndArray().solution(rc, operations)
+    print(answer.toList().map { it.toList() })
 
 //    // 백준
 //    StartAndLink().apply { run() }
