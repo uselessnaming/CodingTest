@@ -4,14 +4,20 @@ import java.util.*
 
 fun main() {
     //프로그래머스
-    val rc = arrayOf(
-        intArrayOf(1, 2, 3, 4),
-        intArrayOf(5, 6, 7, 8),
-        intArrayOf(9, 10, 11, 12)
+    val sales = intArrayOf(14, 17, 15, 18, 19, 14, 13, 16, 28, 17)
+    val links = arrayOf(
+        intArrayOf(10, 8),
+        intArrayOf(1, 9),
+        intArrayOf(9, 7),
+        intArrayOf(5, 4),
+        intArrayOf(1, 5),
+        intArrayOf(5, 10),
+        intArrayOf(10, 6),
+        intArrayOf(1, 3),
+        intArrayOf(10, 2),
     )
-    val operations = arrayOf("ShiftRow", "Rotate", "ShiftRow", "Rotate")
-    val answer = MatrixAndArray().solution(rc, operations)
-    print(answer.toList().map { it.toList() })
+    val answer = MinimizeSales().solution(sales, links)
+    println(answer)
 
 //    // 백준
 //    StartAndLink().apply { run() }
