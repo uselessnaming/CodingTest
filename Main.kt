@@ -1,22 +1,19 @@
 import 백준.*
 import 프로그래머스.*
-import java.util.*
+import kotlin.random.Random
 
 fun main() {
     //프로그래머스
-    val sales = intArrayOf(14, 17, 15, 18, 19, 14, 13, 16, 28, 17)
-    val links = arrayOf(
-        intArrayOf(10, 8),
-        intArrayOf(1, 9),
-        intArrayOf(9, 7),
-        intArrayOf(5, 4),
-        intArrayOf(1, 5),
-        intArrayOf(5, 10),
-        intArrayOf(10, 6),
-        intArrayOf(1, 3),
-        intArrayOf(10, 2),
-    )
-    val answer = MinimizeSales().solution(sales, links)
+    val depth = intArrayOf(1,2,3,4,5,6,7,8,9,10)
+    val money = 55
+    val treasureIdx = Random.nextInt(0, depth.size)
+    val excavate: (Int) -> Int = {
+        if (treasureIdx == it) it
+        else if (treasureIdx > it) 1
+        else -1
+    }
+
+    val answer = FindTreasure().solution(depth, money, excavate)
     println(answer)
 
 //    // 백준
