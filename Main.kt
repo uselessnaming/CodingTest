@@ -4,21 +4,18 @@ import kotlin.random.Random
 
 fun main() {
     //프로그래머스
-    val n = 3
-    val count = 1
-
-    val arr1 = arrayOf(
-        intArrayOf(1, 4),
-        intArrayOf(3, 2),
-        intArrayOf(4, 1),
-    )
-    val arr2 = arrayOf(
-        intArrayOf(3, 3),
-        intArrayOf(3, 3),
+    val n = 7
+    val wires = arrayOf(
+        intArrayOf(1, 2),
+        intArrayOf(2, 7),
+        intArrayOf(3, 7),
+        intArrayOf(3, 4),
+        intArrayOf(4, 5),
+        intArrayOf(6, 7),
     )
 
-    val answer = MatrixMultiplication().solution(arr1, arr2)
-    println(answer.map { it.toList() })
+    val answer = DivideElectricNet().solution(n, wires)
+    println(answer)
 
 //    // 백준
 //    StartAndLink().apply { run() }
