@@ -12,7 +12,7 @@ class HintStage {
             var totalCost = 0
 
             for (i in 0 until m) {
-                if ((mask and (1 shl 1)) != 0) {
+                if ((mask and (1 shl i)) != 0) {
                     totalCost += hint[i][0]
 
                     for (j in 1 until hint[i].size) {
