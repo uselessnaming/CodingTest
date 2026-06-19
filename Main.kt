@@ -4,10 +4,20 @@ import kotlin.random.Random
 
 fun main() {
     //프로그래머스
-    val distLimit = 3
-    val splitLimit = 100
+    val user_id = arrayOf(
+        "frodo",
+        "fradi",
+        "crodo",
+        "abc123",
+        "frodoc",
+    )
+    val banned_id = arrayOf(
+        "*rodo",
+        "*rodo",
+        "******"
+    )
 
-    val answer = MaxOfLeafNode().solution(distLimit, splitLimit)
+    val answer = InvalidUser().solution(user_id, banned_id)
     println(answer)
 
 //    // 백준
