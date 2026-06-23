@@ -4,21 +4,57 @@ import kotlin.random.Random
 
 fun main() {
     //프로그래머스
-    val user_id = arrayOf(
-        "frodo",
-        "fradi",
-        "crodo",
-        "abc123",
-        "frodoc",
+    val gems = arrayOf(
+        "DIA",
+        "RUBY",
+        "RUBY",
+        "DIA",
+        "DIA",
+        "EMERALD",
+        "SAPPHIRE",
+        "DIA"
     )
-    val banned_id = arrayOf(
-        "*rodo",
-        "*rodo",
-        "******"
+    val gems2 = arrayOf(
+        "AA",
+        "AB",
+        "AC",
+        "AA",
+        "AC"
+    )
+    val gems3 = arrayOf(
+        "XYZ",
+        "XYZ",
+        "XYZ",
+    )
+    val gems4 = arrayOf(
+        "ZZZ",
+        "YYY",
+        "NNNN",
+        "YYY",
+        "BBB",
+    )
+    val gemsEx = arrayOf(
+        "AA",
+        "AA",
+        "AA",
+        "AA",
+        "BB",
+        "CC",
+    )
+    val gemsEx2 = arrayOf(
+        "AA",
+        "BB",
+        "BB",
+        "CC",
+        "AA",
+        "CC",
+        "BB",
+        "BB",
+        "AA",
     )
 
-    val answer = InvalidUser().solution(user_id, banned_id)
-    println(answer)
+    val answer = GemShopping().solution(gemsEx2)
+    println(answer.toList())
 
 //    // 백준
 //    StartAndLink().apply { run() }
