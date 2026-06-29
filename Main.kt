@@ -4,19 +4,24 @@ import kotlin.random.Random
 
 fun main() {
     //프로그래머스
-    val n = 5
-    val roads = arrayOf(
-        intArrayOf(1, 2),
-        intArrayOf(1, 4),
-        intArrayOf(2, 4),
-        intArrayOf(2, 5),
-        intArrayOf(4, 5)
+//    val board = arrayOf(
+//        intArrayOf(0,0,0),
+//        intArrayOf(0,0,0),
+//        intArrayOf(0,0,0),
+//    )
+    val board = arrayOf(
+        intArrayOf(0,0,0,0,0,0,0,1),
+        intArrayOf(0,0,0,0,0,0,0,0),
+        intArrayOf(0,0,0,0,0,1,0,0),
+        intArrayOf(0,0,0,0,1,0,0,0),
+        intArrayOf(0,0,0,1,0,0,0,1),
+        intArrayOf(0,0,1,0,0,0,1,0),
+        intArrayOf(0,1,0,0,0,1,0,0),
+        intArrayOf(1,0,0,0,0,0,0,0)
     )
-    val sources = intArrayOf(1, 3, 5)
-    val destination = 5
 
-    val answer = ReturnArmy().solution(n, roads, sources, destination)
-    println(answer.toList())
+    val answer = BuildRoad().solution(board)
+    println(answer)
 
 //    // 백준
 //    StartAndLink().apply { run() }
