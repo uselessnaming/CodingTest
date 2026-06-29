@@ -4,23 +4,10 @@ import kotlin.random.Random
 
 fun main() {
     //프로그래머스
-//    val board = arrayOf(
-//        intArrayOf(0,0,0),
-//        intArrayOf(0,0,0),
-//        intArrayOf(0,0,0),
-//    )
-    val board = arrayOf(
-        intArrayOf(0,0,0,0,0,0,0,1),
-        intArrayOf(0,0,0,0,0,0,0,0),
-        intArrayOf(0,0,0,0,0,1,0,0),
-        intArrayOf(0,0,0,0,1,0,0,0),
-        intArrayOf(0,0,0,1,0,0,0,1),
-        intArrayOf(0,0,1,0,0,0,1,0),
-        intArrayOf(0,1,0,0,0,1,0,0),
-        intArrayOf(1,0,0,0,0,0,0,0)
-    )
-
-    val answer = BuildRoad().solution(board)
+//    val s = "abcdcba"
+//    val s = "abacde"
+    val s = "abba"
+    val answer = LongestPalindrome().solution(s)
     println(answer)
 
 //    // 백준
