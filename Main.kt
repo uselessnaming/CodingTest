@@ -4,8 +4,15 @@ import kotlin.random.Random
 
 fun main() {
     //프로그래머스
-    val a = intArrayOf(-16, 27, 65, -2, 58, -92, -71, -68, -61, -33)
-    val answer = PoppingBalloon().solution(a)
+    val n = 5
+    val results = arrayOf(
+        intArrayOf(4, 3),
+        intArrayOf(4, 2),
+        intArrayOf(3, 2),
+        intArrayOf(1, 2),
+        intArrayOf(2, 5),
+    )
+    val answer = Order().solution(n, results)
     println(answer)
 
 //    // 백준
