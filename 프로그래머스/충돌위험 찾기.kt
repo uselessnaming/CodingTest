@@ -1,64 +1,78 @@
 package 프로그래머스
 
-// 각 점들의 이동 방식 세로 좌표를 먼저 맞춘 후 가로 좌표를 맞춘다
-// 점들의 이동 경로에 대해 숫자로 표기
-// map을 MutableList로 해서 지나가는 경로에 대한 숫자를 표기
-// 전체 map을 확인하고 map에 중복된 숫자가 있는 개수를 count
+class `충돌위험 찾기` {
+    private var R = 0
+    private var C = 0
+    private val pointMap = mutableMapOf<Int, Point>()
 
-class FindCollisionRiskSecond {
-    private val maxX = 101
-    private val maxY = 101
-    private val routeMap = List(maxX) { List(maxY) { mutableListOf<Int>() } }
+    data class Point(val x: Int, val y: Int)
 
     fun solution(points: Array<IntArray>, routes: Array<IntArray>): Int {
+        setBoardSize(points)
+        setPointMap(points)
 
-        routes.forEach { route -> writeRoute(points, route) }
+        var longestRouteDist = 0
+        val shortestRoutes = mutableListOf<List<Point>>()
 
-        return routeMap.sumOf { row ->
-            row.sumOf { col ->
-                col.groupingBy{ it }
-                    .eachCount()
-                    .count { (_, cnt) -> cnt >= 2 }
-            }
+        for(route in routes){
+            val shortestRoute = findShortestRoute(route)
+            shortestRoutes.add(shortestRoute)
+            longestRouteDist = maxOf(longestRouteDist, shortestRoute.size)
+        }
+        return findStrikeCount(shortestRoutes, longestRouteDist)
+    }
+
+    private fun setBoardSize(points: Array<IntArray>) {
+        for(point in points){
+            R = maxOf(R, point[0])
+            C = maxOf(C, point[1])
         }
     }
 
-    private fun writeRoute(points: Array<IntArray>, route: IntArray) {
-        val init = points[route[0] - 1]
-        routeMap[init[0]][init[1]].add(0)
-        var cnt = 1
+    private fun setPointMap(points: Array<IntArray>) {
+        for ((idx, point) in points.withIndex()){
+            pointMap[idx+1] = Point(point[1], point[0])
+        }
+    }
 
-        for (idx in 0 until route.size - 1) {
-            val start = points[route[idx] - 1]
-            val end = points[route[idx + 1] - 1]
+    private fun findStrikeCount(shortestRoutes: List<List<Point>>, longestRouteDist: Int): Int {
+        var totalCount = 0
 
-            if (start[0] != end[0]) {
-                val dx = if (start[0] < end[0]) 1 else -1
-                var xx = start[0] + dx
+        for(i in 0 until longestRouteDist){
+            val countMap = mutableMapOf<Point, Int>()
 
-                while(true) {
-                    routeMap[xx][start[1]].add(cnt)
-                    cnt++
-
-                    if (xx == end[0]) break
-
-                    xx += dx
-                }
+            for (route in shortestRoutes){
+                val point = route.getOrNull(i)
+                if(point != null){ countMap[point] = countMap.getOrDefault(point, 0) + 1 }
             }
 
-            if (start[1] != end[1]) {
-                val dy = if (start[1] < end[1]) 1 else -1
-                var yy = start[1] + dy
+            totalCount += countMap.values.count{it > 1}
+        }
+        return totalCount
+    }
 
-                while(true) {
-                    routeMap[end[0]][yy].add(cnt)
-                    cnt++
+    private fun findShortestRoute(routePoints: IntArray): List<Point> {
+        val shortestRoute = mutableListOf<Point>()
 
-                    if (yy == end[1]) break
+        for(i in 1 until routePoints.size){
+            val start = pointMap[routePoints[i-1]]!!
+            val end = pointMap[routePoints[i]]!!
+            var r = start.y
+            var c = start.x
 
-                    yy += dy
-                }
+            if(shortestRoute.isEmpty()){
+                shortestRoute.add(Point(r,c))
+            }
+
+            while(r != end.y){
+                r += if (r>end.y) -1 else 1
+                shortestRoute.add(Point(r,c))
+            }
+            while(c != end.x){
+                c += if (c > end.x) -1 else 1
+                shortestRoute.add(Point(r,c))
             }
         }
+        return shortestRoute
     }
 }
