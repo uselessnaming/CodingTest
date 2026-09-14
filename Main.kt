@@ -4,29 +4,10 @@ import kotlin.random.Random
 
 fun main() {
     //프로그래머스
-    val points = arrayOf(
-        intArrayOf(3, 2),
-        intArrayOf(6, 4),
-        intArrayOf(4, 7),
-        intArrayOf(1, 4),
-    )
-    val routes = arrayOf(
-        intArrayOf(4, 2),
-        intArrayOf(1, 3),
-        intArrayOf(4, 2),
-        intArrayOf(4, 3),
-    )
-    val key = arrayOf(
-        intArrayOf(1, 0),
-        intArrayOf(0, 0)
-    )
+    val depth = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    val money = 55
 
-    val lock = arrayOf(
-        intArrayOf(0, 0),
-        intArrayOf(1, 1)
-    )
-
-    val answer = FindCollisionRiskSecond().solution(points, routes)
+    val answer = FindTreasureSecond().solution(depth, money, excavate = {})
     println(answer)
 
 //    // 백준
