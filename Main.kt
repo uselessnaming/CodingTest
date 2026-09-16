@@ -3,13 +3,10 @@ import 프로그래머스.*
 import kotlin.random.Random
 
 fun main() {
-    //프로그래머스
-    val depth = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-    val money = 55
+    val arr = intArrayOf(16952, 70276, 16771, 37992, 87549, 54906, 36718, 20478, 57088, 27916, 51509, 83422, 51707, 18807, 80859, 2673, 37734, 93380)
+    val l = 149845L
+    val r = 228204L
 
-    val answer = FindTreasureSecond().solution(depth, money, excavate = {})
-    println(answer)
-
-//    // 백준
-//    StartAndLink().apply { run() }
+    val answer = SquareArraySecond().solution(arr, l, r)
+    println(answer.toList())
 }
