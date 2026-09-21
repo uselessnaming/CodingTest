@@ -7,27 +7,25 @@ fun main() {
 //    val l = 149845L
 //    val r = 228204L
 
-    val cost = arrayOf(
-        intArrayOf(49250, 42271, 40724, 36310, 32560, 30670, 24100, 10378),
-        intArrayOf(58510, 56101, 54078, 32864, 31443, 19451, 18098, 7187),
-        intArrayOf(68812, 66112, 65024, 60529, 53992, 39865, 31325, 17700),
-        intArrayOf(13768, 12866, 11379, 10425, 6853, 6176, 5655, 2556),
-        intArrayOf(51748, 48647, 41478, 39756, 25302, 18081, 16504, 811),
-        intArrayOf(52690, 34113, 32370, 29555, 19343, 11763, 7566, 5962),
-        intArrayOf(9306, 9190, 8196, 7573, 6275, 4723, 1316, 212),
-        intArrayOf(40713, 40158, 31449, 22349, 20956, 20377, 19489, 14450)
+    val m = 4
+    val n = 6
+    val h = 1
+    val w = 2
+    val drops = arrayOf(
+        intArrayOf(0, 1),
+        intArrayOf(0, 3),
+        intArrayOf(0, 5),
+        intArrayOf(1, 1),
+        intArrayOf(1, 3),
+        intArrayOf(1, 5),
+        intArrayOf(2, 1),
+        intArrayOf(2, 3),
+        intArrayOf(2, 5),
+        intArrayOf(3, 1),
+        intArrayOf(3, 3),
+        intArrayOf(3, 5),
     )
 
-    val hint = arrayOf(
-        intArrayOf(0, 2, 4, 6, 2),
-        intArrayOf(0, 6, 3, 3, 4),
-        intArrayOf(0, 6, 4, 5, 5),
-        intArrayOf(0, 7, 5, 8, 7),
-        intArrayOf(0, 7, 7, 7, 7),
-        intArrayOf(0, 7, 7, 7, 8),
-        intArrayOf(0, 8, 8, 8, 8)
-    )
-
-    val answer = HintStageSecond().solution(cost, hint)
-    println(answer)
+    val answer = HidingCactus().solution(m, n, h, w, drops)
+    println(answer.toList())
 }
