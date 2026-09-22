@@ -7,25 +7,14 @@ fun main() {
 //    val l = 149845L
 //    val r = 228204L
 
-    val m = 4
-    val n = 6
-    val h = 1
-    val w = 2
-    val drops = arrayOf(
-        intArrayOf(0, 1),
-        intArrayOf(0, 3),
-        intArrayOf(0, 5),
-        intArrayOf(1, 1),
-        intArrayOf(1, 3),
-        intArrayOf(1, 5),
-        intArrayOf(2, 1),
-        intArrayOf(2, 3),
-        intArrayOf(2, 5),
-        intArrayOf(3, 1),
-        intArrayOf(3, 3),
-        intArrayOf(3, 5),
+    val grid = arrayOf(
+        intArrayOf(1, 0, 0, 0),
+        intArrayOf(0, 0, 0, 0),
+        intArrayOf(0, 0, 0, 0),
+        intArrayOf(0, 0, 0, 0),
+        intArrayOf(0, 0, 0, 1),
     )
 
-    val answer = HidingCactus().solution(m, n, h, w, drops)
-    println(answer.toList())
+    val answer = TrainTile().solution(grid)
+    println(answer)
 }
