@@ -7,14 +7,8 @@ fun main() {
 //    val l = 149845L
 //    val r = 228204L
 
-    val grid = arrayOf(
-        intArrayOf(1, 0, 0, 0),
-        intArrayOf(0, 0, 0, 0),
-        intArrayOf(0, 0, 0, 0),
-        intArrayOf(0, 0, 0, 0),
-        intArrayOf(0, 0, 0, 1),
-    )
+    val numbers = longArrayOf(2, 7, 15, 4)
 
-    val answer = TrainTile().solution(grid)
-    println(answer)
+    val answer = FindBit().solution(numbers)
+    println(answer.toList())
 }
