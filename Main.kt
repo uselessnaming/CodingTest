@@ -7,8 +7,8 @@ fun main() {
 //    val l = 149845L
 //    val r = 228204L
 
-    val numbers = longArrayOf(2, 7, 15, 4)
+    val n = 12
 
-    val answer = FindBit().solution(numbers)
-    println(answer.toList())
+    val answer = NQueen().solution(n)
+    println(answer)
 }
