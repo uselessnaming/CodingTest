@@ -6,6 +6,6 @@ fun main() {
     val userIds = arrayOf("frodo", "fradi", "crodo", "abc123", "frodoc")
     val bannedIds = arrayOf("fr*d*", "*rodo", "******", "******")
 
-    val answer = IllegalUser().solution(userIds, bannedIds)
+    val answer = IllegalUserSecond().solution(userIds, bannedIds)
     println(answer)
 }

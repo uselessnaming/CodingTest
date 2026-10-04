@@ -7,7 +7,7 @@ class IllegalUserSecond {
     fun solution(user_id: Array<String>, banned_id: Array<String>): Int {
         val n = user_id.size
         val m = banned_id.size
-        visited = IntArray(m)
+        visited = IntArray(n) { 0 }
 
         for (i in 0 until m) {
             var mask = 0
@@ -19,7 +19,7 @@ class IllegalUserSecond {
             visited[i] = mask
         }
 
-        dfs(0, 0, banned_id.size)
+        dfs(0, 0, m)
         return answerSet.size
     }
 
@@ -30,8 +30,8 @@ class IllegalUserSecond {
         return reg.matches(user)
     }
 
-    private fun dfs(idx: Int, used: Int, m: Int) {
-        if (idx == m) {
+    private fun dfs(idx: Int, used: Int, limit: Int) {
+        if (idx == limit) {
             answerSet.add(used)
             return
         }
@@ -42,7 +42,7 @@ class IllegalUserSecond {
             val pos = available and (-available)
             available -= pos
 
-            dfs(idx + 1, used or pos, m)
+            dfs(idx + 1, used or pos, limit)
         }
     }
 }
