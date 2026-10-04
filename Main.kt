@@ -3,12 +3,9 @@ import 프로그래머스.*
 import kotlin.random.Random
 
 fun main() {
-//    val arr = intArrayOf(16952, 70276, 16771, 37992, 87549, 54906, 36718, 20478, 57088, 27916, 51509, 83422, 51707, 18807, 80859, 2673, 37734, 93380)
-//    val l = 149845L
-//    val r = 228204L
+    val userIds = arrayOf("frodo", "fradi", "crodo", "abc123", "frodoc")
+    val bannedIds = arrayOf("fr*d*", "*rodo", "******", "******")
 
-    val n = 12
-
-    val answer = NQueen().solution(n)
+    val answer = IllegalUser().solution(userIds, bannedIds)
     println(answer)
 }
