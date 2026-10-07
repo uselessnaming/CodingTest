@@ -3,9 +3,10 @@ import 프로그래머스.*
 import kotlin.random.Random
 
 fun main() {
-    val userIds = arrayOf("frodo", "fradi", "crodo", "abc123", "frodoc")
-    val bannedIds = arrayOf("fr*d*", "*rodo", "******", "******")
+    val n = 12
+    val weak = intArrayOf(1, 5, 6, 10)
+    val dist = intArrayOf(1, 2, 3, 4)
 
-    val answer = IllegalUserSecond().solution(userIds, bannedIds)
+    val answer = CheckWallSecond().solution(n, weak, dist)
     println(answer)
 }
