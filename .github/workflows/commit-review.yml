@@ -6,7 +6,7 @@ name: Claude Commit Review
 
 on:
   push:
-    branches: [main]
+    branches: [master]
     # 풀이 코드가 바뀐 push에서만 실행 (README만 수정한 push 등은 건너뜀)
     paths:
       - '**.py'
