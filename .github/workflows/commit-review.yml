@@ -1,0 +1,97 @@
+# 저장 위치: .github/workflows/commit-review.yml
+# main 브랜치에 코테 풀이가 push되면 Claude가 풀이를 리뷰해 커밋 코멘트로 남깁니다.
+# 커밋 메시지에 [skip review]를 넣으면 그 push는 리뷰를 건너뜁니다.
+
+name: Claude Commit Review
+
+on:
+  push:
+    branches: [main]
+    # 풀이 코드가 바뀐 push에서만 실행 (README만 수정한 push 등은 건너뜀)
+    paths:
+      - '**.py'
+      - '**.java'
+      - '**.cpp'
+      - '**.cc'
+      - '**.c'
+      - '**.js'
+      - '**.ts'
+      - '**.kt'
+      - '**.go'
+      - '**.swift'
+      - '**.rs'
+
+jobs:
+  review:
+    if: ${{ !contains(github.event.head_commit.message, '[skip review]') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write   # 커밋 코멘트 작성
+      id-token: write   # Claude GitHub App 인증
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0   # push 이전 커밋과 비교하려면 전체 히스토리가 필요
+
+      # 1단계: 이번 push에서 추가·수정된 풀이 파일만 골라냄 (Claude 호출 전에 걸러서 비용 절약)
+      - name: Collect changed solutions
+        id: changes
+        run: |
+          AFTER="${{ github.sha }}"
+          BEFORE="${{ github.event.before }}"
+          # 첫 push(000…)나 force push로 이전 커밋이 없으면 직전 커밋 또는 빈 트리와 비교
+          if ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+            if git cat-file -e "${AFTER}~1^{commit}" 2>/dev/null; then
+              BEFORE="$(git rev-parse "${AFTER}~1")"
+            else
+              BEFORE="$(git hash-object -t tree /dev/null)"
+            fi
+          fi
+          # 한글·공백이 들어간 경로(예: 백준허브 폴더명)도 그대로 받도록 quotePath 끔
+          FILES="$(git -c core.quotePath=false diff --name-only --diff-filter=AM "$BEFORE" "$AFTER" -- \
+            '*.py' '*.java' '*.cpp' '*.cc' '*.c' '*.js' '*.ts' '*.kt' '*.go' '*.swift' '*.rs' \
+            | head -n 10)"
+          COUNT="$(printf '%s' "$FILES" | grep -c . || true)"
+          echo "base=$BEFORE" >> "$GITHUB_OUTPUT"
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+          {
+            echo "files<<__FILES__"
+            echo "$FILES"
+            echo "__FILES__"
+          } >> "$GITHUB_OUTPUT"
+          echo "리뷰 대상 ${COUNT}개:"
+          echo "$FILES"
+
+      # 2단계: Claude가 풀이를 읽고 리뷰를 작성해 커밋 코멘트로 게시
+      - name: Claude review
+        if: steps.changes.outputs.count != '0'
+        uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # gh api로 코멘트를 달 때 사용
+        with:
+          # Claude 구독(Pro/Max)으로 인증하는 경우
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # API 키로 인증하는 경우 위 줄을 지우고 아래 줄을 사용
+          # anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            이 저장소는 코딩 테스트 풀이 저장소입니다. 방금 main 브랜치에 push된 풀이를 리뷰해 주세요.
+            리뷰 기준과 코멘트 형식은 저장소 루트의 CLAUDE.md를 따릅니다.
+
+            - 저장소: ${{ github.repository }}
+            - 비교 범위: ${{ steps.changes.outputs.base }} .. ${{ github.sha }}
+            - 리뷰 대상 파일 (한 줄에 하나):
+            ${{ steps.changes.outputs.files }}
+
+            파일마다 다음 순서로 진행하세요.
+            1. Read로 풀이 코드 전체를 읽습니다. 같은 폴더에 README.md가 있으면 문제 설명으로 참고합니다.
+            2. 수정된 파일이면 `git diff <비교 범위 시작> <비교 범위 끝> -- "<파일 경로>"`로 이번에 바뀐 부분도 확인합니다.
+            3. `git log -1 --format=%H <비교 범위 시작>..<비교 범위 끝> -- "<파일 경로>"`로 그 파일을 마지막으로 바꾼 커밋 SHA를 찾습니다.
+            4. 리뷰 본문을 Write로 `.claude-review/<순번>.md`에 저장합니다.
+            5. `gh api repos/${{ github.repository }}/commits/<3에서 찾은 SHA>/comments -F body=@.claude-review/<순번>.md`로 커밋 코멘트를 게시합니다.
+
+            코드를 수정하거나 커밋·push하지 마세요. 코멘트 게시가 끝나면 종료합니다.
+          claude_args: |
+            --max-turns 30
+            --allowedTools "Read,Glob,Grep,Write,Bash(git diff:*),Bash(git log:*),Bash(git show:*),Bash(gh api:*)"
