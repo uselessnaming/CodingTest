@@ -1,7 +1,5 @@
 package 프로그래머스
 
-// test 용 주석
-
 class TakeOutBox {
     fun solution(n: Int, w: Int, num: Int): Int {
         var answer = 0
