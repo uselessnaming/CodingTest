@@ -1,11 +1,14 @@
-import 백준.*
 import 프로그래머스.*
 
 fun main() {
-    val n = 22
-    val w = 6
-    val num = 8
+    val info = arrayOf(
+        intArrayOf(1, 2),
+        intArrayOf(2, 3),
+        intArrayOf(2, 1),
+    )
+    val n = 1
+    val m = 7
 
-    val answer = TakeOutBox().solution(n, w, num)
+    val answer = PerfectCrimeSecond().solution(info, n, m)
     println(answer)
 }
