@@ -1,6 +1,5 @@
 import 백준.*
 import 프로그래머스.*
-import kotlin.random.Random
 
 fun main() {
     val n = 22
