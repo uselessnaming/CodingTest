@@ -1,5 +1,5 @@
 # 저장 위치: .github/workflows/commit-review.yml
-# master 브랜치에 코테 풀이가 push되면 Claude가 풀이를 리뷰해 커밋 코멘트로 남깁니다.
+# master 브랜치에 코테 풀이가 push되면 Claude가 파일마다 리뷰 이슈를 만들고, 커밋에 이슈 링크를 남깁니다.
 # 커밋 메시지에 [skip review]를 넣으면 그 push는 리뷰를 건너뜁니다.
 
 name: Claude Commit Review
@@ -28,6 +28,7 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: write   # 커밋 코멘트 작성
+      issues: write     # 리뷰 이슈 생성
 
     steps:
       - uses: actions/checkout@v6
@@ -70,13 +71,13 @@ jobs:
           curl -fsSL https://claude.ai/install.sh | bash
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
-      # 3단계: Claude가 풀이를 읽고 리뷰를 작성해 커밋 코멘트로 게시
+      # 3단계: Claude가 풀이를 읽고 리뷰 이슈를 만든 뒤 커밋에 링크를 남김
       - name: Claude review
         if: steps.changes.outputs.count != '0'
         env:
           # Claude 구독(Pro/Max) 토큰. API 키를 쓰면 이 줄 대신 ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # gh api로 코멘트를 달 때 사용
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           BASE: ${{ steps.changes.outputs.base }}
           HEAD_SHA: ${{ github.sha }}
@@ -85,7 +86,7 @@ jobs:
           mkdir -p .claude-review
           cat > .claude-review/prompt.txt <<EOF
           이 저장소는 코딩 테스트 풀이 저장소입니다. 방금 master 브랜치에 push된 풀이를 리뷰해 주세요.
-          리뷰 기준과 코멘트 형식은 저장소 루트의 CLAUDE.md를 따릅니다.
+          리뷰 기준과 형식은 저장소 루트의 CLAUDE.md를 따릅니다.
 
           - 저장소: $REPO
           - 비교 범위 시작: $BASE
@@ -98,10 +99,15 @@ jobs:
           2. 수정된 파일이면 git diff $BASE $HEAD_SHA -- "파일 경로" 로 이번에 바뀐 부분도 확인합니다.
           3. git log -1 --format=%H $BASE..$HEAD_SHA -- "파일 경로" 로 그 파일을 마지막으로 바꾼 커밋 SHA를 찾습니다.
           4. 리뷰 본문을 Write로 .claude-review/순번.md 파일에 저장합니다. (예: .claude-review/1.md)
-          5. gh api repos/$REPO/commits/찾은SHA/comments -F body=@.claude-review/순번.md 로 커밋 코멘트를 게시합니다.
+             본문 맨 끝에는 반드시 아래 세 줄을 그대로 붙입니다. (커밋SHA와 파일 경로는 실제 값으로)
+             ---
+             🔗 리뷰한 커밋: 커밋SHA · 이 이슈에 @claude 를 넣어 의견을 남기면 Claude가 답합니다.
+             <!-- review-meta commit=커밋SHA path=파일 경로 -->
+          5. gh issue create --title "[리뷰] 파일 경로" --body-file .claude-review/순번.md 로 리뷰 이슈를 만들고, 출력된 이슈 URL을 기억합니다.
+          6. gh api repos/$REPO/commits/커밋SHA/comments -f body="🧑‍🏫 리뷰가 이슈로 등록됐어요: 이슈URL" 로 커밋에 이슈 링크를 남깁니다.
 
-          코드를 수정하거나 커밋·push하지 마세요. 코멘트 게시가 끝나면 종료합니다.
+          코드를 수정하거나 커밋·push하지 마세요. 모든 파일을 마치면 종료합니다.
           EOF
           claude -p "$(cat .claude-review/prompt.txt)" \
             --max-turns 30 \
-            --allowedTools "Read,Glob,Grep,Write,Bash(git diff:*),Bash(git log:*),Bash(git show:*),Bash(gh api:*)"
+            --allowedTools "Read,Glob,Grep,Write,Bash(git diff:*),Bash(git log:*),Bash(git show:*),Bash(gh api:*),Bash(gh issue create:*)"
