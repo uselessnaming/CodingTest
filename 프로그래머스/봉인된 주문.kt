@@ -1,10 +1,10 @@
 package 프로그래머스
 
-import kotlin.comparisons.compareBy
 import kotlin.math.pow
 
+const val ALPHA = 26
+
 class ForbiddenSpell {
-    private val MAX = 26
     fun solution(n: Long, bans: Array<String>): String {
         var n = n
 
@@ -19,7 +19,7 @@ class ForbiddenSpell {
         var res = 0L
         this.reversed().forEachIndexed { idx, ch ->
             val alpha = ch - 'a' + 1
-            res += (MAX.toDouble().pow(idx).toLong() * alpha)
+            res += (ALPHA.toDouble().pow(idx).toLong() * alpha)
         }
 
         return res
@@ -31,8 +31,8 @@ class ForbiddenSpell {
 
         while (n > 0) {
             n--
-            sb.append('a' + (n % MAX).toInt())
-            n /= MAX
+            sb.append('a' + (n % ALPHA).toInt())
+            n /= ALPHA
         }
 
         return sb.reverse().toString()
