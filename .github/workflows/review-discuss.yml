@@ -1,0 +1,76 @@
+# 저장 위치: .github/workflows/commit-discuss.yml
+# 커밋 댓글에 @claude를 넣어 의견을 남기면, Claude가 그 커밋의 코드와 지금까지의 댓글을 읽고 답글을 답니다.
+# 레포 주인이 쓴 댓글에만 반응합니다. 답글 형식은 CLAUDE.md의 "커밋 댓글 대화 가이드"를 따릅니다.
+
+name: Claude Commit Discussion
+
+on:
+  commit_comment:
+    types: [created]
+
+jobs:
+  reply:
+    # 레포 주인이 @claude를 불렀을 때만 실행
+    # (Claude의 답글은 GitHub 로봇 계정으로 달려서 이 워크플로를 다시 실행시키지 않음)
+    if: >-
+      github.event.comment.user.login == github.repository_owner &&
+      contains(github.event.comment.body, '@claude')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write   # 커밋 댓글·리액션 작성
+
+    steps:
+      # 댓글을 확인했다는 표시로 👀 리액션 (답글이 오기까지 1~3분 걸리므로)
+      - name: React to comment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api "repos/${{ github.repository }}/comments/${{ github.event.comment.id }}/reactions" \
+            -f content=eyes > /dev/null || true
+
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.comment.commit_id }}
+          fetch-depth: 0
+
+      - name: Install Claude Code
+        run: |
+          curl -fsSL https://claude.ai/install.sh | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Claude reply
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          COMMIT_SHA: ${{ github.event.comment.commit_id }}
+          COMMENT_ID: ${{ github.event.comment.id }}
+          COMMENT_PATH: ${{ github.event.comment.path }}
+          COMMENT_POSITION: ${{ github.event.comment.position }}
+        run: |
+          mkdir -p .claude-review
+          if [ -n "$COMMENT_PATH" ] && [ -n "$COMMENT_POSITION" ]; then
+            WHERE="이 댓글은 $COMMENT_PATH 파일의 특정 줄(diff position $COMMENT_POSITION)에 달린 줄 댓글입니다. 답글도 같은 줄에 달아 대화가 한곳에 모이게 하세요: gh api repos/$REPO/commits/$COMMIT_SHA/comments -F body=@.claude-review/reply.md -f path=\"$COMMENT_PATH\" -F position=$COMMENT_POSITION"
+          else
+            WHERE="이 댓글은 커밋 전체에 달린 일반 댓글입니다. 답글도 일반 댓글로 다세요: gh api repos/$REPO/commits/$COMMIT_SHA/comments -F body=@.claude-review/reply.md"
+          fi
+          cat > .claude-review/prompt.txt <<EOF
+          이 저장소는 코딩 테스트 풀이 저장소입니다. 사용자가 커밋 $COMMIT_SHA 에 달린 리뷰를 보고 의견을 댓글로 남겼습니다.
+          저장소 루트 CLAUDE.md의 "커밋 댓글 대화 가이드"에 따라 답글을 작성하세요.
+
+          진행 순서:
+          1. gh api repos/$REPO/commits/$COMMIT_SHA/comments --paginate 로 이 커밋의 댓글 전체를 시간순으로 읽습니다.
+             작성자가 github-actions[bot]인 댓글은 Claude가 앞서 남긴 리뷰와 답글입니다. 대화 흐름 전체를 파악하세요.
+          2. 답해야 할 댓글은 id가 $COMMENT_ID 인 댓글입니다.
+          3. git show --stat $COMMIT_SHA 와 Read로 이 커밋에서 바뀐 풀이 코드를 확인합니다. 같은 폴더의 README.md가 있으면 문제 설명으로 참고합니다.
+          4. 필요하면 근거를 직접 검증합니다. Python 스크립트를 Write로 .claude-review/ 아래에 만들고 python3로 실행해 반례나 실행 시간을 확인할 수 있습니다.
+          5. 참고 자료가 필요하면 WebSearch, WebFetch로 직접 확인한 자료만 링크합니다.
+          6. 답글을 Write로 .claude-review/reply.md 에 저장한 뒤 게시합니다.
+             $WHERE
+
+          코드를 수정하거나 커밋·push하지 마세요. 답글 하나를 게시하면 종료합니다.
+          EOF
+          claude -p "$(cat .claude-review/prompt.txt)" \
+            --max-turns 40 \
+            --allowedTools "Read,Glob,Grep,Write,WebSearch,WebFetch,Bash(git show:*),Bash(git diff:*),Bash(git log:*),Bash(gh api:*),Bash(python3:*)"
