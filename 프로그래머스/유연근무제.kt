@@ -1,7 +1,7 @@
 package 프로그래머스
 
 class FlexibleWorking {
-    private val WEEKDAYS = 7
+    private val DAY_IN_WEEK = 7
     private val DURATION = 10
     private val HOUR = 60
     private val TIME_SEPRATOR = 100
@@ -12,14 +12,14 @@ class FlexibleWorking {
     }
 
     private fun canGet(timelog: IntArray, start: Int, startDay: Int): Boolean {
-        val availableEnd = start + DURATION
+        val availableEnd = (start + DURATION).toMinute()
 
-        repeat(WEEKDAYS) { time ->
-            val currentDay = (startDay + time) % WEEKDAYS
+        repeat(DAY_IN_WEEK) { time ->
+            val currentDay = (startDay + time) % DAY_IN_WEEK
 
             if (currentDay >= SAT) return@repeat
 
-            if (timelog[time].toMinute() > availableEnd.toMinute()) return false
+            if (timelog[time].toMinute() > availableEnd) return false
         }
 
         return true
