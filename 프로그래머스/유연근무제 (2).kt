@@ -1,6 +1,6 @@
 package 프로그래머스
 
-class FlexiableWorkSystem {
+class `유연근무제 (2)` {
     fun solution(schedules: IntArray, timelogs: Array<IntArray>, startday: Int): Int{
         val result = IntArray(schedules.size){ 0 }
 
