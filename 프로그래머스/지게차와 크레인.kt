@@ -2,7 +2,7 @@ package 프로그래머스
 
 import java.util.*
 
-class ForkLiftAndCrane {
+class `지게차와 크레인` {
     lateinit var map: Array<String>
     lateinit var isOut: Array<IntArray>
 
