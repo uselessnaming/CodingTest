@@ -44,22 +44,22 @@ class OddAndEven {
             }
         }
     }
-}
 
-class ExploreResult{
-    var oddNode = 0
-    var evenNode = 0
-    var reverseOddNode = 0
-    var reverseEvenNode = 0
+    class ExploreResult{
+        var oddNode = 0
+        var evenNode = 0
+        var reverseOddNode = 0
+        var reverseEvenNode = 0
 
-    fun getReverseOddEvenTree(): Int{
-        return if (reverseOddNode == 1 && reverseEvenNode == 0) 1
-        else if (reverseOddNode == 0 && reverseEvenNode == 1) 1
-        else 0
-    }
+        fun getReverseOddEvenTree(): Int{
+            return if (reverseOddNode == 1 && reverseEvenNode == 0) 1
+            else if (reverseOddNode == 0 && reverseEvenNode == 1) 1
+            else 0
+        }
 
-    fun getOddEvenTree(): Int{
-        return if ((oddNode == 1 && evenNode == 0) || (oddNode == 0 && evenNode == 1)) 1
-        else 0
+        fun getOddEvenTree(): Int{
+            return if ((oddNode == 1 && evenNode == 0) || (oddNode == 0 && evenNode == 1)) 1
+            else 0
+        }
     }
 }
