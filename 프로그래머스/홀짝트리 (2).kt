@@ -33,10 +33,8 @@ class OddEvenTree {
         val next = graph[current]!!
 
         when {
-            next.size % 2 == 0 && current % 2 == 0 -> treeFinder.addEven()
-            next.size % 2 == 1 && current % 2 == 0 -> treeFinder.addReverseEven()
-            next.size % 2 == 0 && current % 2 == 1 -> treeFinder.addReverseOdd()
-            next.size % 2 == 1 && current % 2 == 1 -> treeFinder.addOdd()
+            current % 2 == next.size % 2 -> treeFinder.addSame()
+            current % 2 != next.size % 2 -> treeFinder.addDiff()
         }
 
         visited.add(current)
@@ -48,22 +46,18 @@ class OddEvenTree {
     }
 
     inner class TreeFinder {
-        private var odd = 0
-        private var even = 0
-        private var reverseOdd = 0
-        private var reverseEven = 0
+        private var same = 0
+        private var diff = 0
 
         fun getOddEvenTree(): Int =
-            if ((odd == 1 && even == 0) || (odd == 0 && even == 1)) 1
+            if (same == 1) 1
             else 0
 
-        fun getReverseOddEvenTree(): Int = if (reverseOdd == 1 && reverseEven == 0) 1
-        else if (reverseOdd == 0 && reverseEven == 1) 1
-        else 0
+        fun getReverseOddEvenTree(): Int =
+            if (diff == 1) 1
+            else 0
 
-        fun addOdd() = odd++
-        fun addEven() = even++
-        fun addReverseOdd() = reverseOdd++
-        fun addReverseEven() = reverseEven++
+        fun addSame() { same++ }
+        fun addDiff() { diff++ }
     }
 }
