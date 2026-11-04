@@ -13,7 +13,7 @@ class ChoiceDice {
             val aDice = ArrayList<IntArray>()
             val bDice = ArrayList<IntArray>()
             for (i in 0 until total) {
-                if (mask and (1 shl i) != 0) aDice.add(dice[i]) else bDice.add(dice[i])
+                if (isIn(mask, i)) aDice.add(dice[i]) else bDice.add(dice[i])
             }
             val cntA = distribute(aDice)
             val cntB = distribute(bDice)
@@ -29,7 +29,7 @@ class ChoiceDice {
                 bestWins = wins
                 answer = IntArray(half)
                 var idx = 0
-                for (i in 0 until total) if (mask and (1 shl i) != 0) answer[idx++] = i + 1
+                for (i in 0 until total) if (isIn(mask, i)) answer[idx++] = i + 1
             }
         }
 
@@ -49,6 +49,10 @@ class ChoiceDice {
         }
 
         return dp
+    }
+
+    private fun isIn(mask: Int, i: Int): Boolean {
+        return mask and (1 shl i) != 0
     }
 
     companion object {
