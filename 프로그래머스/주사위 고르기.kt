@@ -27,7 +27,7 @@ class ChoiceDice {
 
             if (wins > bestWins) {
                 bestWins = wins
-                answer = intArrayOf(half)
+                answer = IntArray(half)
                 var idx = 0
                 for (i in 0 until total) if (mask and (1 shl i) != 0) answer[idx++] = i + 1
             }
