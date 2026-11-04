@@ -1,5 +1,7 @@
 package 프로그래머스
 
+import kotlin.collections.any
+
 // responses는 응답자의 답변
 // 전체 정답을 subtasks로 나눠서 전체 점수를 체점
 // subtasks는 공백으로 구분되며 첫 부분은 점수, 뒷 부분은 맞아야 하는 문항들을 뜻함
@@ -18,7 +20,7 @@ class CodingTest1101_1 {
             for (sidx in split.indices) {
                 val score = scores[sidx]
 
-                if (problems.any { responses[idx][sidx] != correctAnswers[sidx] }) continue
+                if (problems[sidx].any { responses[idx][it - 1] != correctAnswers[it - 1] }) continue
 
                 answer[idx] += score
             }
