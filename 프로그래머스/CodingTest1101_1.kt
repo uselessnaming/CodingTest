@@ -10,13 +10,15 @@ class CodingTest1101_1 {
     fun solution(correctAnswers: IntArray, responses: Array<IntArray>, subtasks: Array<String>): IntArray {
         val answer = IntArray(responses.size) { 0 }
 
-        for (idx in responses.indices) {
-            for (subtask in subtasks) {
-                val splited = subtask.split(" ")
-                val score = splited[0].toInt()
-                val problems = splited.subList(1, splited.size).map { it.toInt() }
+        val split = subtasks.map { it.split(" ") }
+        val scores = split.map { it[0].toInt() }
+        val problems = split.map { it.subList(1, it.size).map { it.toInt() } }
 
-                if (problems.any { responses[idx][it - 1] != correctAnswers[it - 1] }) continue
+        for (idx in responses.indices) {
+            for (sidx in split.indices) {
+                val score = scores[sidx]
+
+                if (problems.any { responses[idx][sidx] != correctAnswers[sidx] }) continue
 
                 answer[idx] += score
             }
