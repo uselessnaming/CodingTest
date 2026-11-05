@@ -34,7 +34,7 @@ class CodingTest1101_2 {
         }
 
         for (idx in 0 until k) {
-            if (none[idx].size == 1) {
+            if (none[idx].size == alpha.size - 1) {
                 val ch = none[idx].first()
 
                 if (ch in mustHave) {
