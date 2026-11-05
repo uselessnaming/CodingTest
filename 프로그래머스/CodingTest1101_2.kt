@@ -8,9 +8,7 @@ package 프로그래머스
 
 class CodingTest1101_2 {
     fun solution(k: Int, words: Array<String>, submit: Array<String>): Array<String> {
-        val none = mutableMapOf<Int, MutableSet<Char>>().apply {
-            repeat(k) { idx -> this[idx] = mutableSetOf() }
-        }
+        val none = Array<MutableSet<Char>>(k) { mutableSetOf() }
         val mustHave = mutableSetOf<Char>()
 
         for (s in submit) {
@@ -19,16 +17,16 @@ class CodingTest1101_2 {
             for (idx in target.indices) {
                 when (res[idx]) {
                     'N' -> {
-                        none.keys.forEach { key -> none[key]!!.add(target[idx]) }
+                        none.forEach { n -> n.add(target[idx]) }
                     }
 
                     'M' -> {
-                        none[idx]!!.addAll(alpha)
-                        none[idx]!!.remove(target[idx])
+                        none[idx].addAll(alpha)
+                        none[idx].remove(target[idx])
                     }
 
                     'I' -> {
-                        none[idx]!!.add(target[idx])
+                        none[idx].add(target[idx])
                         mustHave.add(target[idx])
                     }
                 }
@@ -36,19 +34,21 @@ class CodingTest1101_2 {
         }
 
         for (idx in 0 until k) {
-            if (none[idx]!!.size == 1) {
-                val ch = none[idx]!!.first()
+            if (none[idx].size == 1) {
+                val ch = none[idx].first()
 
-                if (ch in mustHave) { mustHave.remove(ch) }
+                if (ch in mustHave) {
+                    mustHave.remove(ch)
+                }
             }
         }
 
         return words.filter { word -> isAvailable(word, none) && mustHave.all { it in word } }.toTypedArray()
     }
 
-    private fun isAvailable(word: String, none: Map<Int, MutableSet<Char>>): Boolean {
+    private fun isAvailable(word: String, none: Array<MutableSet<Char>>): Boolean {
         return word.withIndex().all { (idx, ch) ->
-            ch !in none[idx]!!
+            ch !in none[idx]
         }
     }
 
