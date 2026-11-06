@@ -10,7 +10,7 @@ class CodingTest1101_2 {
     fun solution(k: Int, words: Array<String>, submit: Array<String>): Array<String> {
         val banned = hashSetOf<Char>()
         val included = hashSetOf<Pair<Char, Int>>()
-        val matched = CharArray(k)
+        val matched = CharArray(k) { '.' }
 
         for (s in submit) {
             val (target, res) = s.split(' ')
@@ -32,7 +32,7 @@ class CodingTest1101_2 {
             }
         }
 
-        val reg = Regex(matched.joinToString("").replace('\u0000', '.'))
+        val reg = Regex(matched.joinToString(""))
 
         return words.filter{ word -> word.all{ it !in banned } }
             .filter{ word -> reg.matches(word) }
@@ -47,9 +47,5 @@ class CodingTest1101_2 {
             if (word[idx] == ch) return false
         }
         return true
-    }
-
-    companion object {
-        val alpha = ('A'..'Z').toSet()
     }
 }
