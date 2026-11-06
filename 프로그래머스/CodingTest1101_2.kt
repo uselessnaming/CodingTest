@@ -8,8 +8,9 @@ package 프로그래머스
 
 class CodingTest1101_2 {
     fun solution(k: Int, words: Array<String>, submit: Array<String>): Array<String> {
-        val none = Array<MutableSet<Char>>(k) { mutableSetOf() }
-        val mustHave = mutableSetOf<Char>()
+        val banned = hashSetOf<Char>()
+        val included = hashSetOf<Pair<Char, Int>>()
+        val matched = CharArray(k)
 
         for (s in submit) {
             val (target, res) = s.split(' ')
@@ -17,39 +18,35 @@ class CodingTest1101_2 {
             for (idx in target.indices) {
                 when (res[idx]) {
                     'N' -> {
-                        none.forEach { n -> n.add(target[idx]) }
+                        banned.add(target[idx])
                     }
 
                     'M' -> {
-                        none[idx].addAll(alpha)
-                        none[idx].remove(target[idx])
+                        matched[idx] = target[idx]
                     }
 
                     'I' -> {
-                        none[idx].add(target[idx])
-                        mustHave.add(target[idx])
+                        included.add(target[idx] to idx)
                     }
                 }
             }
         }
 
-        for (idx in 0 until k) {
-            if (none[idx].size == alpha.size - 1) {
-                val ch = alpha.first { it !in none[idx] }
+        val reg = Regex(matched.joinToString("").replace('\u0000', '.'))
 
-                if (ch in mustHave) {
-                    mustHave.remove(ch)
-                }
-            }
-        }
-
-        return words.filter { word -> isAvailable(word, none) && mustHave.all { it in word } }.toTypedArray()
+        return words.filter{ word -> word.all{ it !in banned } }
+            .filter{ word -> reg.matches(word) }
+            .filter{ word -> isAllIncluded(word, included) }
+            .sorted()
+            .toTypedArray()
     }
 
-    private fun isAvailable(word: String, none: Array<MutableSet<Char>>): Boolean {
-        return word.withIndex().all { (idx, ch) ->
-            ch !in none[idx]
+    private fun isAllIncluded(word: String, hashSet: HashSet<Pair<Char, Int>>): Boolean {
+        for ((ch, idx) in hashSet) {
+            if (ch !in word) return false
+            if (word[idx] == ch) return false
         }
+        return true
     }
 
     companion object {
