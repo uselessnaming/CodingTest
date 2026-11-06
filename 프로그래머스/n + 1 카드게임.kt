@@ -18,21 +18,21 @@ class N1CardGame {
             pending.add(cards[next + 1])
             next += 2
 
-            val zero = hand.firstOrNull { target - it in hand }
-            if (zero != null) {
-                hand.remove(zero)
-                hand.remove(target - zero)
+            val handPair = hand.firstOrNull { target - it in hand && isNotMe(target, it)}
+            if (handPair != null) {
+                hand.remove(handPair)
+                hand.remove(target - handPair)
             } else {
-                val one = if (coin >= 1) hand.firstOrNull { target - it in pending } else null
-                if (one != null) {
-                    hand.remove(one)
-                    pending.remove(target - one)
+                val handPendingPair = if (coin >= 1) hand.firstOrNull { target - it in pending && isNotMe(target, it) } else null
+                if (handPendingPair != null) {
+                    hand.remove(handPendingPair)
+                    pending.remove(target - handPendingPair)
                     coin -= 1
                 } else {
-                    val two = if (coin >= 2) pending.firstOrNull { target - it in pending } else null
-                    if (two != null) {
-                        pending.remove(two)
-                        pending.remove(target - two)
+                    val pendingPair = if (coin >= 2) pending.firstOrNull { target - it in pending && isNotMe(target, it) } else null
+                    if (pendingPair != null) {
+                        pending.remove(pendingPair)
+                        pending.remove(target - pendingPair)
                         coin -= 2
                     } else {
                         return round
@@ -43,4 +43,6 @@ class N1CardGame {
         }
         return round
     }
+
+    private fun isNotMe(target: Int, it: Int): Boolean = it != target - it
 }
