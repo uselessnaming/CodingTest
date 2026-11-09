@@ -15,10 +15,12 @@ class EmoticonSaleEvent {
     private fun dfs(emoticons: IntArray, sales: IntArray, idx: Int) {
         if (idx == sales.size) {
             var user = 0
-            var total = 0.toDouble()
+            var total = 0
 
             for ((sale, limit) in users) {
-                var sell = 0.toDouble()
+                var sell = 0
+
+
                 val buyIndices = sales.withIndex().filter { it.value >= sale }
                     .map { it.index }
 
@@ -26,7 +28,7 @@ class EmoticonSaleEvent {
                     sell += ((emoticons[idx] * (100 - sales[idx])) / 100)
                 }
 
-                total += if (sell >= limit) 0.toDouble() else sell
+                total += if (sell >= limit) 0 else sell
                 user += if (sell >= limit) 1 else 0
             }
 
