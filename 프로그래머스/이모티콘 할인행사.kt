@@ -20,12 +20,8 @@ class EmoticonSaleEvent {
             for ((sale, limit) in users) {
                 var sell = 0
 
-
-                val buyIndices = sales.withIndex().filter { it.value >= sale }
-                    .map { it.index }
-
-                for (idx in buyIndices) {
-                    sell += ((emoticons[idx] * (100 - sales[idx])) / 100)
+                for (i in sales.indices) {
+                    if (sales[i] >= sale) sell += ((emoticons[idx] * (100 - sales[i])) / 100)
                 }
 
                 total += if (sell >= limit) 0 else sell
@@ -34,7 +30,7 @@ class EmoticonSaleEvent {
 
             if ((user == answer[0] && total > answer[1]) || user > answer[0]) {
                 answer[0] = user
-                answer[1] = total.toInt()
+                answer[1] = total
             }
 
             return
