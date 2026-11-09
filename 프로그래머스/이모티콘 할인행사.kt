@@ -21,11 +21,10 @@ class EmoticonSaleEvent {
                 var sell = 0
 
                 for (i in sales.indices) {
-                    if (sales[i] >= sale) sell += ((emoticons[idx] * (100 - sales[i])) / 100)
+                    if (sales[i] >= sale) sell += ((emoticons[i] * (100 - sales[i])) / 100)
                 }
 
-                total += if (sell >= limit) 0 else sell
-                user += if (sell >= limit) 1 else 0
+                if (sell >= limit) user++ else total += sell
             }
 
             if ((user == answer[0] && total > answer[1]) || user > answer[0]) {
