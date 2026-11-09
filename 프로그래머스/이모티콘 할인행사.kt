@@ -23,7 +23,7 @@ class EmoticonSaleEvent {
                     .map { it.index }
 
                 for (idx in buyIndices) {
-                    sell += (emoticons[idx] * (1 - sales[idx] * 0.01))
+                    sell += ((emoticons[idx] * (100 - sales[idx])) / 100)
                 }
 
                 total += if (sell >= limit) 0.toDouble() else sell
