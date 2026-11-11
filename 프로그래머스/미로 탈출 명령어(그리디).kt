@@ -36,6 +36,6 @@ class EscapeMazeCommandSecond {
     }
 
     companion object {
-        const val IMPOSSIBLE = "IMPOSSIBLE"
+        const val IMPOSSIBLE = "impossible"
     }
 }
