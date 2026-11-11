@@ -4,8 +4,8 @@ import kotlin.math.max
 
 class DeliveryAndPickup {
     fun solution(cap: Int, n: Int, deliveries: IntArray, pickups: IntArray): Long {
-        val deliveries = deliveries
-        val pickups = pickups
+        val deliveries = deliveries.copyOf()
+        val pickups = pickups.copyOf()
 
         var remainDelivery = cap // 남은 적재량
         var remainPickup = cap // 남은 픽업량
