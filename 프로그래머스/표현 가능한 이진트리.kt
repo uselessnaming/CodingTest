@@ -9,7 +9,7 @@ class ExpressionalBinaryTree {
             var n = 2
             while (n - 1 < bin.length) n *= 2
 
-            val res = "0".repeat(n - 1 - bin.length) + bin
+            val res = ZERO.toString().repeat(n - 1 - bin.length) + bin
             if (isPossible(res)) answer.add(1)
             else answer.add(0)
         }
@@ -24,12 +24,17 @@ class ExpressionalBinaryTree {
         val left = bin.take(mid)
         val right = bin.takeLast(mid)
 
-        if (bin[mid] == '0') {
-            if (bin.any { it == '1' }) return false
+        if (bin[mid] == ZERO) {
+            if (bin.any { it == ONE }) return false
 
             return true
         }
 
         return isPossible(left) && isPossible(right)
+    }
+
+    companion object {
+        const val ZERO = '0'
+        const val ONE = '1'
     }
 }
