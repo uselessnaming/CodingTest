@@ -10,27 +10,25 @@ class ExpressionalBinaryTree {
             while (n - 1 < bin.length) n *= 2
 
             val res = ZERO.toString().repeat(n - 1 - bin.length) + bin
-            if (isPossible(res)) answer.add(1)
+            if (isPossible(res, 0, res.length)) answer.add(1)
             else answer.add(0)
         }
 
         return answer.toIntArray()
     }
 
-    private fun isPossible(bin: String): Boolean {
-        if (bin.length == 1) return true
+    private fun isPossible(bin: String, startIdx: Int, endIdx: Int): Boolean {
+        if (endIdx - startIdx == 1) return true
 
-        val mid = bin.length / 2
-        val left = bin.take(mid)
-        val right = bin.takeLast(mid)
+        val mid = (startIdx + endIdx) / 2
 
         if (bin[mid] == ZERO) {
-            if (bin.any { it == ONE }) return false
+            for (i in startIdx until endIdx) if (bin[i] == ONE) return false
 
             return true
         }
 
-        return isPossible(left) && isPossible(right)
+        return isPossible(bin, startIdx, mid) && isPossible(bin, mid + 1, endIdx)
     }
 
     companion object {
