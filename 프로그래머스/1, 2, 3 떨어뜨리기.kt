@@ -1,6 +1,6 @@
 package 프로그래머스
 
-class DropOneTowThree {
+class DropOneTwoThree {
     fun solution(edges: Array<IntArray>, target: IntArray): IntArray {
         val n = target.size
         val graph = Array<MutableList<Int>>(n + 1) { mutableListOf() }
