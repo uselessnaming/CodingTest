@@ -21,13 +21,13 @@ class EqualizeTwoQueueSum {
             if (answer >= 3 * max) return -1
 
             if (sum1 > target) {
-                val discard = q1.poll()
-                sum1 -= discard
-                q2.add(discard)
+                val moved = q1.poll()
+                sum1 -= moved
+                q2.add(moved)
             } else {
-                val discard = q2.poll()
-                sum1 += discard
-                q1.add(discard)
+                val moved = q2.poll()
+                sum1 += moved
+                q1.add(moved)
             }
             answer++
         }
