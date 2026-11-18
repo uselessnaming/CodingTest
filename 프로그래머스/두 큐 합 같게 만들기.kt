@@ -16,8 +16,6 @@ class EqualizeTwoQueueSum {
         var answer = 0
 
         while(sum1 != target) {
-            if (q1.isEmpty() || q1.size == max) return -1
-
             if (answer >= 3 * max) return -1
 
             if (sum1 > target) {
