@@ -16,7 +16,7 @@ class EqualizeTwoQueueSum {
         var answer = 0
 
         while(sum1 != target) {
-            if (answer >= 3 * max) return -1
+            if (answer >= max * 2) return -1
 
             if (sum1 > target) {
                 val moved = q1.poll()
