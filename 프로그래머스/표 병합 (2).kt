@@ -57,7 +57,7 @@ class MergeTableSecond {
             Command.PRINT.name -> {
                 val r = st.nextToken().toInt()
                 val c = st.nextToken().toInt()
-                print(r, c)
+                printCell(r, c)
             }
         }
     }
@@ -110,7 +110,7 @@ class MergeTableSecond {
         for (idx in dList) parents[idx] = idx
     }
 
-    private fun print(r: Int, c: Int) {
+    private fun printCell(r: Int, c: Int) {
         val cIdx = getCvtIdx(r, c)
         val root = find(cIdx)
         answer.add(values[root].ifEmpty { EMPTY })
