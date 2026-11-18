@@ -16,8 +16,6 @@ class MergeTableSecond {
     }
 
     fun solution(commands: Array<String>): Array<String> {
-        val answer = ArrayList<String>()
-
         for (cmd in commands) {
             process(cmd)
         }
