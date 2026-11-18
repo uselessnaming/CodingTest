@@ -7,15 +7,15 @@ class EqualizeTwoQueueSum {
         val max = queue1.size + queue2.size
         val q1 = LinkedList(queue1.toList())
         val q2 = LinkedList(queue2.toList())
-        var sum1 = queue1.sumOf{it.toLong()}
-        val sum2 = queue2.sumOf{it.toLong()}
+        var sum1 = queue1.sumOf { it.toLong() }
+        val sum2 = queue2.sumOf { it.toLong() }
 
         if ((sum1 + sum2) % 2 != 0L) return -1
 
         val target = (sum1 + sum2) / 2L
         var answer = 0
 
-        while(sum1 != target) {
+        while (sum1 != target) {
             if (answer >= max * 2) return -1
 
             if (sum1 > target) {
