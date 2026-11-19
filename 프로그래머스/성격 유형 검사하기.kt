@@ -1,6 +1,6 @@
 package 프로그래머스
 
-class TestPersonality {
+class PersonalityTest {
     fun solution(survey: Array<String>, choices: IntArray): String {
         val res = IntArray(SIZE)
         var answer = ""
@@ -9,21 +9,21 @@ class TestPersonality {
             val score = choices[idx] - MIDDLE
 
             when(survey[idx]) {
-                RION + TUBE -> res[0] += score
-                TUBE + RION -> res[0] -= score
-                CON + FRODO -> res[1] += score
-                FRODO + CON -> res[1] -= score
-                JAZY + MUZI -> res[2] += score
-                MUZI + JAZY -> res[2] -= score
-                APEACH + NEO -> res[3] += score
-                NEO + APEACH -> res[3] -= score
+                RION + TUBE -> res[IDX_RT] += score
+                TUBE + RION -> res[IDX_RT] -= score
+                CON + FRODO -> res[IDX_CF] += score
+                FRODO + CON -> res[IDX_CF] -= score
+                JAZY + MUZI -> res[IDX_JM] += score
+                MUZI + JAZY -> res[IDX_JM] -= score
+                APEACH + NEO -> res[IDX_AN] += score
+                NEO + APEACH -> res[IDX_AN] -= score
             }
         }
 
-        answer += if (res[0] <= 0) RION else TUBE
-        answer += if (res[1] <= 0) CON else FRODO
-        answer += if (res[2] <= 0) JAZY else MUZI
-        answer += if (res[3] <= 0) APEACH else NEO
+        answer += if (res[IDX_RT] <= 0) RION else TUBE
+        answer += if (res[IDX_CF] <= 0) CON else FRODO
+        answer += if (res[IDX_JM] <= 0) JAZY else MUZI
+        answer += if (res[IDX_AN] <= 0) APEACH else NEO
 
         return answer
     }
@@ -39,5 +39,10 @@ class TestPersonality {
         const val NEO = "N"
         const val MIDDLE = 4
         const val SIZE = 4
+
+        const val IDX_RT = 0
+        const val IDX_CF = 1
+        const val IDX_JM = 2
+        const val IDX_AN = 3
     }
 }
