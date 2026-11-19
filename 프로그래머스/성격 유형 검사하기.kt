@@ -19,12 +19,12 @@ class PersonalityTest {
             }
         }
 
-        return StringBuilder().apply {
+        return buildString {
             append(if (res[IDX_RT] <= 0) RION else TUBE)
             append(if (res[IDX_CF] <= 0) CON else FRODO)
             append(if (res[IDX_JM] <= 0) JAZY else MUZI)
             append(if (res[IDX_AN] <= 0) APEACH else NEO)
-        }.toString()
+        }
     }
 
     companion object {
