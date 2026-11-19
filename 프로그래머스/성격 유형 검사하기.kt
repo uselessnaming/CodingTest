@@ -3,7 +3,6 @@ package 프로그래머스
 class PersonalityTest {
     fun solution(survey: Array<String>, choices: IntArray): String {
         val res = IntArray(SIZE)
-        var answer = ""
 
         for (idx in survey.indices) {
             val score = choices[idx] - MIDDLE
@@ -20,12 +19,12 @@ class PersonalityTest {
             }
         }
 
-        answer += if (res[IDX_RT] <= 0) RION else TUBE
-        answer += if (res[IDX_CF] <= 0) CON else FRODO
-        answer += if (res[IDX_JM] <= 0) JAZY else MUZI
-        answer += if (res[IDX_AN] <= 0) APEACH else NEO
-
-        return answer
+        return StringBuilder().apply {
+            append(if (res[IDX_RT] <= 0) RION else TUBE)
+            append(if (res[IDX_CF] <= 0) CON else FRODO)
+            append(if (res[IDX_JM] <= 0) JAZY else MUZI)
+            append(if (res[IDX_AN] <= 0) APEACH else NEO)
+        }.toString()
     }
 
     companion object {
@@ -37,6 +36,7 @@ class PersonalityTest {
         const val MUZI = "M"
         const val APEACH = "A"
         const val NEO = "N"
+
         const val MIDDLE = 4
         const val SIZE = 4
 
