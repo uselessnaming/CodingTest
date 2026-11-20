@@ -65,7 +65,5 @@ class SelectCourse {
     data class Node(
         val idx: Int,
         val intensity: Int
-    ): Comparable<Node> {
-        override fun compareTo(other: Node): Int = intensity - other.intensity
-    }
+    )
 }
