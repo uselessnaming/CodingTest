@@ -46,9 +46,7 @@ class SelectCourse {
         while(queue.isNotEmpty()) {
             val cur = queue.poll()
 
-            if (cur.intensity < costs[cur.idx]) {
-                costs[cur.idx] = cur.intensity
-            }
+            if (cur.intensity > costs[cur.idx]) continue
 
             for (next in graph[cur.idx]) {
                 val nextIntensity = maxOf(cur.intensity, next.intensity)
