@@ -1,6 +1,6 @@
 package 프로그래머스
 
-class CodingTestStudy {
+class CodingTestStudySecond {
     fun solution(alp: Int, cop: Int, problems: Array<IntArray>): Int {
         val targetAlp = problems.maxOf{it[0]}
         val targetCop = problems.maxOf{it[1]}
