@@ -16,11 +16,11 @@ class CodingTestStudySecond {
 
                 if (cur == Int.MAX_VALUE) continue
 
-                if (a + 1 < targetAlp) {
+                if (a + 1 <= targetAlp) {
                     dp[a + 1][c] = minOf(dp[a + 1][c], cur + 1)
                 }
 
-                if (c + 1 < targetCop) {
+                if (c + 1 <= targetCop) {
                     dp[a][c + 1] = minOf(dp[a][c + 1], cur + 1)
                 }
 
