@@ -72,8 +72,8 @@ class SelectCourseUnionFind {
                     val s = pendSummit[e]
                     if (best[s] == INF) {
                         best[s] = w
-                        e = pendNext[e]
                     }
+                    e = pendNext[e]
                 }
 
                 pendHead[ra] = -1
