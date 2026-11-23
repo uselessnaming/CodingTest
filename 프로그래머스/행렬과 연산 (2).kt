@@ -23,7 +23,7 @@ class MatrixAndArraySecond {
 
     private fun split(rc: Array<IntArray>, r: Int, c: Int) {
         for (i in rc.indices) {
-            val m = ArrayList<Int>()
+            val m = ArrayDeque<Int>()
             for (j in rc[i].indices) {
                 if (j == 0) {
                     left.add(rc[i][j])
@@ -33,7 +33,7 @@ class MatrixAndArraySecond {
                     m.add(rc[i][j])
                 }
             }
-            middle.add(ArrayDeque(m))
+            middle.add(m)
         }
     }
 
