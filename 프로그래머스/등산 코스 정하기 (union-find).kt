@@ -9,7 +9,7 @@ class SelectCourseUnionFind {
         for (s in summits) type[s] = SUMMIT
 
         parents = IntArray(n + 1) { it }
-        val hasGate = BooleanArray(n + 1) { type[it] == 1 }
+        val hasGate = BooleanArray(n + 1) { type[it] == GATE }
         val best = IntArray(n + 1) { INF }
 
         val pendHead = IntArray(n + 1) { -1 }
