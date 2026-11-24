@@ -1,13 +1,11 @@
 package 프로그래머스
 
-import kotlin.math.*
-
 class GetPrimeInK {
-    fun solution(n: Int, k: Int): Int{
+    fun solution(n: Int, k: Int): Int {
         val split = n.toString(k).split('0')
         var cnt = 0
 
-        for(s in split) {
+        for (s in split) {
             if (s.isNotEmpty() && isPrime(s.toLong())) cnt++
         }
 
@@ -20,7 +18,7 @@ class GetPrimeInK {
         if (n % 2 == 0L) return false
 
         var i = 3L
-        while(i * i <= n) {
+        while (i * i <= n) {
             if (n % i == 0L) return false
             i += 2
         }
