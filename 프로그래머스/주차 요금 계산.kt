@@ -2,37 +2,26 @@ package 프로그래머스
 
 class ParkingFeeCalculation {
     fun solution(fees: IntArray, records: Array<String>): IntArray {
-        val answer = ArrayList<Int>()
-        val sorted = records.map{it.split(' ')}.sortedBy {it[1]}
-        var bef = sorted[0][1]
-        var totalTime = 0
+        return records
+            .map { it.split(' ') }
+            .groupBy({ it[1] }, { it[0].convertToMinute() to it[2] })
+            .toSortedMap()
+            .map { (_, logs) -> calculateParkingMinutes(logs).calculateFee(fees) }
+            .toIntArray()
+    }
 
-        for ((time, num, type) in sorted) {
-            if (bef != num) {
-                if (totalTime <= 0) { totalTime += LIMIT.convertToMinute() }
-
-                answer.add(totalTime.calculateFee(fees))
-                bef = num
-                totalTime = 0
-            }
-
-            when(type) {
-                Type.IN.name -> { totalTime -= time.convertToMinute() }
-
-                Type.OUT.name -> { totalTime += time.convertToMinute() }
-            }
+    private fun calculateParkingMinutes(logs: List<Pair<Int, String>>): Int {
+        var total = 0
+        for ((time, type) in logs) {
+            total += if (type == Type.IN.name) -time else time
         }
-
-        if (totalTime <= 0) { totalTime += LIMIT.convertToMinute() }
-
-        answer.add(totalTime.calculateFee(fees))
-
-        return answer.toIntArray()
+        if (logs.last().second == Type.IN.name) total += LIMIT
+        return total
     }
 
     private fun String.convertToMinute(): Int {
-        val (hour, minute) = this.split(':').map{it.toInt()}
-        return hour * 60 + minute
+        val (hour, minute) = this.split(':').map { it.toInt() }
+        return hour * HOUR + minute
     }
 
     private fun Int.calculateFee(fees: IntArray): Int {
@@ -48,6 +37,7 @@ class ParkingFeeCalculation {
     enum class Type { IN, OUT }
 
     companion object {
-        const val LIMIT = "23:59"
+        const val HOUR = 60
+        const val LIMIT = 23 * HOUR + 59
     }
 }
