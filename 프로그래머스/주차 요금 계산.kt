@@ -6,7 +6,7 @@ class ParkingFeeCalculation {
             .map { it.split(' ') }
             .groupBy({ it[1] }, { it[0].convertToMinute() to it[2] })
             .toSortedMap()
-            .map { (_, logs) -> calculateParkingMinutes(logs).calculateFee(fees) }
+            .values.map { calculateParkingMinutes(it).calculateFee(fees) }
             .toIntArray()
     }
 
