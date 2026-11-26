@@ -27,7 +27,13 @@ class ParkingFeeCalculationWithHashMap {
         }
 
         for ((num, time) in recordMap) {
-            if (time != -1) sumMap[num] = sumMap[num]!! + (LIMIT - time)
+            if (time != -1) {
+                if (sumMap.contains(num)) {
+                    sumMap[num] = sumMap[num]!! + (LIMIT - time)
+                } else {
+                    sumMap[num] = LIMIT - time
+                }
+            }
         }
 
         return sumMap.toSortedMap()
