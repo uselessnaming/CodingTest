@@ -11,10 +11,7 @@ class ParkingFeeCalculation {
     }
 
     private fun calculateParkingMinutes(logs: List<Pair<Int, String>>): Int {
-        var total = 0
-        for ((time, type) in logs) {
-            total += if (type == Type.IN.name) -time else time
-        }
+        var total = logs.sumOf { (time, type) -> if (type == Type.IN.name) -time else time }
         if (logs.last().second == Type.IN.name) total += LIMIT
         return total
     }
