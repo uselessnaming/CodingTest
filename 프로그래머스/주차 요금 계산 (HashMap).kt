@@ -16,24 +16,14 @@ class ParkingFeeCalculationWithHashMap {
 
                 Type.OUT.name -> {
                     val duration = time.convertToMinute() - recordMap[num]!!
-                    if (!sumMap.contains(num)) {
-                        sumMap[num] = duration
-                    } else {
-                        sumMap[num] = sumMap[num]!! + duration
-                    }
-                    recordMap[num] = -1
+                    sumMap[num] = (sumMap[num] ?: 0) + duration
+                    recordMap.remove(num)
                 }
             }
         }
 
         for ((num, time) in recordMap) {
-            if (time != -1) {
-                if (sumMap.contains(num)) {
-                    sumMap[num] = sumMap[num]!! + (LIMIT - time)
-                } else {
-                    sumMap[num] = LIMIT - time
-                }
-            }
+            sumMap[num] = (sumMap[num] ?: 0) + (LIMIT - time)
         }
 
         return sumMap.toSortedMap()
